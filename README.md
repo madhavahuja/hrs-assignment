@@ -23,6 +23,8 @@ Infrastructure created -
     Provides dynamic container environment with an orchestration tool
     Seamless integration with different CI/CD tools such as Jenkins, Github Actions etc with various types of plugins
 
+    Replace subnet-1234567890 with actual subnet ids in ./module/terraform.tfvars
+
 
 2. Automation
 
