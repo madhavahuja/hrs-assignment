@@ -29,7 +29,7 @@ Infrastructure created -
 2. Automation
 
 
-Replace the following values in jenkinsfile
+Replace the following values in jenkinsfile with the exact values. Theese are the placeholders added for your understanding and better clarity.
 
 <AWS_ACCESS_KEY>
 
@@ -49,7 +49,7 @@ Replace the following values in jenkinsfile
 
 <NAMESPACE>
 
-with the exact values. Theese are the placeholders added for your understanding and better clarity.
+
 
 
 
