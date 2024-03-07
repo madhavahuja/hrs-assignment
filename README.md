@@ -22,7 +22,7 @@ Infrastructure created -
     Highly scalable infra
     Provides dynamic container environment with an orchestration tool
     Seamless integration with different CI/CD tools such as Jenkins, Github Actions etc with various types of plugins
-    
+
 
 2. Automation
 
@@ -52,3 +52,5 @@ with the exact values. Theese are the placeholders added for your understanding 
 
 
 3. Coding
+
+Scripting part is covered in shell scripting.
