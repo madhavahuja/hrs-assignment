@@ -13,7 +13,7 @@ Automation
 
 Replace the following values in jenkinsfile
 
-<AWS_ACCESS_KEY>\n
+<AWS_ACCESS_KEY>
 <AWS_SECRET_KEY>
 <REGION>
 <ACCOUNT_ID>
