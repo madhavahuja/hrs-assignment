@@ -23,7 +23,7 @@ Infrastructure created -
     High Level Overview of deployment Procedure with Infra
 
 
-    ![alt text](https://github.com/madhavahuja/hrs-assignment/blob/main/image.png)
+    ![alt text](image.png)
 
 2. Automation
 
