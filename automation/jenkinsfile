@@ -35,7 +35,8 @@ pipeline {
                     sh 'aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com'
                     
                     //I have used build number as docker image tag to create a unique image everytime.                   
-                    sh 'docker build -t <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER . && docker push <ACCOUNT_ID>.dkr.ecr.<REGION.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER'        
+                    sh 'docker build -t <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER . '
+                    sh  'trivy image <ACCOUNT_ID>.dkr.ecr.<REGION.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER && docker push <ACCOUNT_ID>.dkr.ecr.<REGION.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER'        
                     }
                 }
             }
