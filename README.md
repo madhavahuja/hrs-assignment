@@ -18,12 +18,11 @@ Infrastructure created -
 
     These endpoints can be achieved by configuring a service with type ExternalName in their specific namespaces.
 
-
-
-    High Level Overview of deployment Procedure with Infra
-
-
-    ![alt text](image.png)
+    Reason of using EKS
+    Highly scalable infra
+    Provides dynamic container environment with an orchestration tool
+    Seamless integration with different CI/CD tools such as Jenkins, Github Actions etc with various types of plugins
+    
 
 2. Automation
 
