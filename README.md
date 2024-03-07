@@ -18,6 +18,13 @@ Infrastructure created -
 
     These endpoints can be achieved by configuring a service with type ExternalName in their specific namespaces.
 
+
+
+    High Level Overview of deployment Procedure with Infra
+
+
+    ![alt text](image.png)
+
 2. Automation
 
 
