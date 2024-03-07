@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+    environment {
+        AWS_DEFAULT_REGION='<REGION>'
+        AWS_ACCESS_KEY_ID='<AWS_ACCESS_KEY>'
+        AWS_SECRET_ACCESS_KEY='<AWS_SECRET_KEY>'
+    }
+    stages {
+        stage('Git checkout') {
+            steps {
+                git branch: 'main',  //Mention branch. For demo purpose, I have mentioned main
+               // credentialsId: '<PRIVATE_KEY_CREDENTIALS_ID>',  // Required in case of private repository
+                url: 'https://github.com/madhavahuja/hrs-assignment.git'
+            }
+        }
+
+        stage('Login to AWS') {
+            steps {
+                script {
+                    //configure aws credentials
+                    
+                    sh 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID'
+                    sh 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY'
+                    sh 'aws configure set default.region $AWS_DEFAULT_REGION'
+                }
+            }
+        }
+        stage('Build & Push Docker Image to ECR') {
+            steps {
+                script{
+                    //clone repo and perform mvn clean install on springboot project to create jar file.
+                    sh 'mvn clean install'  
+                    
+                    //Login to docker registry {ECR}, create docker image and puh it to ECR   
+                    sh 'aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com'
+                    
+                    //I have used build number as docker image tag to create a unique image everytime.                   
+                    sh 'docker build -t <ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER . && docker push <ACCOUNT_ID>.dkr.ecr.<REGION.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER'        
+                    }
+                }
+            }
+        
+        stage('Update Docker Image in EKS Cluster') {
+            steps {
+                // update kubeconfig with cluster name and region
+                sh 'aws eks update-kubeconfig --name <CLUSTER_NAME> --region <REGION>'
+            
+                //Perform an update on EKS Cluster to update the deployment with recently created image 
+                sh 'kubectl set image deployment <DEPLOYMENT_NAME> -n <NAMESPACE> <CONTAINER_NAME>=<ACCOUNT_ID.dkr.ecr.<REGION>.amazonaws.com/<REPOSITORY_NAME>:$BUILD_NUMBER'
+                }
+            }
+    }
+}
